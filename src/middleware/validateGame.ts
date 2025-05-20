@@ -1,7 +1,8 @@
 import { Request, Response, NextFunction } from "express";
 
 export const validateParameters = (req: Request, res: Response, next: NextFunction): void => {
-    const { guess } = req.body;
+   const guess = req.body.guess as number[];
+
 
  
 

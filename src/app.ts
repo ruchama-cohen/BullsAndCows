@@ -1,12 +1,12 @@
 import express from 'express';
 import cors from 'cors';
-import { connectToDb } from './db/connection';
+import { myDB } from './db/connection';
 import playerRoutes from './players/player.controller';
 import gameRoutes from './games/game.controller';
 
 const app = express();
 
-connectToDb();
+ myDB.DB.connectToDb();
 
 
 app.use(cors());

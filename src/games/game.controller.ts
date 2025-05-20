@@ -23,9 +23,11 @@ router.post('/:gameId/guess', validateParameters, async (req, res) => {
   try {
     const result = await gameService.guess(req.params.gameId, req.body.guess);
     res.json(result);
-  } catch (error) {
-    res.status(400).json({ error: error.message });
-  }
+} catch (error) {
+    const err = error as Error;
+    res.status(400).json({ error: err.message });
+}
+
 });
 
 router.post('/:gameId/end', async (req, res) => {

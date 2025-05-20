@@ -24,8 +24,13 @@ router.put('/:playerId', validateParameters, async (req, res) => {
         const player = await playerService.updatePlayer(req.params.playerId, req.body);
         res.json(player);
     } catch (error) {
+    if (error instanceof Error) {
         res.status(400).json({ error: error.message });
+    } else {
+        res.status(400).json({ error: 'Unknown error' });
     }
+}
+
 });
 
 router.delete('/:playerid', async (req, res) => {
@@ -37,9 +42,14 @@ router.post('/add', validateParameters, async (req, res) => {
     try {
         const player = await playerService.addPlayer(req.body);
         res.status(201).json(player);
-    } catch (error) {
+    }catch (error) {
+    if (error instanceof Error) {
         res.status(400).json({ error: error.message });
+    } else {
+        res.status(400).json({ error: 'Unknown error' });
     }
+}
+
 });
 
 router.get('/:playerid/recent', async (req, res) => {

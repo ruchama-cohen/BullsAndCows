@@ -1,13 +1,23 @@
 import mongoose from 'mongoose';
 
-const MONGODB_URI = 'mongodb://localhost:27017/bulls-and-cows';
+export class myDB {
+    static DB: myDB = new myDB();
+    DB_NAME = 'Shop_DB';
+    URI = `mongodb://localhost:27017/${this.DB_NAME}`;
 
-export async function connectToDb() {
-  try {
-    await mongoose.connect(MONGODB_URI);
-    console.log("Connected to MongoDB");
-  } catch (err) {
-    console.error("MongoDB connection error:", err);
-    process.exit(1);
-  }
+    async connectToDb(): Promise<void> {
+        try {
+            await mongoose.connect(this.URI);
+            console.log('Connected to MongoDB (Mongoose)');
+        } catch (err) {
+            console.error('MongoDB connection error:', err);
+            process.exit(1);
+        }
+    }
+
+    static async getDB(): Promise<myDB> {
+        if (mongoose.connection.readyState === 0)
+            await this.DB.connectToDb();
+        return this.DB;
+    }
 }
