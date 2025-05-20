@@ -1,3 +1,4 @@
+import mongoose from 'mongoose';
 import { Player } from './player.model';
 import { Game } from '../games/game.model';
 
