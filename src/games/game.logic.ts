@@ -3,21 +3,19 @@ export function calcBullPgia(secret: number[], guess: number[]) {
   const secretCopy = [...secret];
   const guessCopy = [...guess];
 
-  // בול
   for (let i = 0; i < 4; i++) {
     if (guessCopy[i] === secretCopy[i]) {
       bulls++;
-      secretCopy[i] = guessCopy[i] = null;
+      secretCopy[i] = guessCopy[i] = -1;
     }
   }
 
-  // פגיעה
   for (let i = 0; i < 4; i++) {
-    if (guessCopy[i] != null) {
+    if (guessCopy[i] !== -1) {
       const index = secretCopy.indexOf(guessCopy[i]);
       if (index > -1) {
         pgias++;
-        secretCopy[index] = null;
+        secretCopy[index] = -1;
       }
     }
   }

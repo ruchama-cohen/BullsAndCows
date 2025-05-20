@@ -1,4 +1,5 @@
 import { Player } from './player.model';
+import { Game } from '../games/game.model';
 
 export async function addPlayer(data: any) {
   const player = new Player(data);
@@ -18,4 +19,15 @@ export async function getPlayerById(id:string){
     return await player;
 }
 
-export async function
+export async function getLeaderboard() {
+  return await Player.find()
+    .sort({ wins: -1 })
+    .limit(10)
+    .select('name wins totalGames');
+}
+
+export async function getRecentGames(playerId: string) {
+  return await Game.find({ playerId })
+    .sort({ createdAt: -1 })
+    .limit(5);
+}
