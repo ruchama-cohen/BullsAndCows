@@ -8,7 +8,7 @@ const attemptSchema = new mongoose.Schema({
 });
 
 const gameSchema = new mongoose.Schema({
-  playerId: { type: mongoose.Schema.Types.ObjectId, ref: 'Player' },
+  playerId: { type: String, required: true },
   secretCode: [Number],
   attempts: [attemptSchema],
   status: { type: String, enum: ['in-progress', 'won', 'lost', 'ended'], default: 'in-progress' },
